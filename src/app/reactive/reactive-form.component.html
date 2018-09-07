@@ -1,0 +1,33 @@
+<form [formGroup]="orderForm">
+  <div formArrayName="items" *ngFor="let item of orderForm.get('items').controls; let i = index;">
+    <div [formGroupName]="i">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input formControlName="name" id="name" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input formControlName="description" id="description" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input formControlName="price" id="price" type="text" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="removeItem(i)" *ngIf="orderForm.controls.items.length > 1">Remove</button>
+
+
+      {{orderForm.controls.items.length}}
+      {{orderForm.controls.items.controls[i].controls.name.value}}
+
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="addItem()" *ngIf="orderForm.controls.items.length < 5">Add</button>
+
+
+
+</form>
